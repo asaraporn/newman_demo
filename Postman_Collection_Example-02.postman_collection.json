@@ -1,0 +1,115 @@
+{
+	"info": {
+		"_postman_id": "febde7fd-04c7-4123-9fe3-0677c17a8c8a",
+		"name": "Postman_Collection_Example-02",
+		"description": "Test_API_BDD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test Script Flow",
+			"item": [
+				{
+					"name": "User Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f85283b6-b426-4c71-80c9-6baa78bd0087",
+								"exec": [
+									"//Check status",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"//Check response",
+									"pm.test(\"respone has token filed\", function () {",
+									"    pm.response.to.have.jsonBody('token')",
+									"});",
+									"pm.test(\"respone has id filed\", function () {",
+									"    pm.response.to.have.jsonBody('id')",
+									"});",
+									"//Get response ",
+									"pm.environment.set(\"token\",  pm.response.json().token);",
+									"pm.environment.set(\"id\",  pm.response.json().id);",
+									"console.log( \"token = \"+ pm.response.json().token)",
+									"console.log( \"id = \"+ pm.response.json().id)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}\r\n"
+						},
+						"url": "{{url_api_test}}/register",
+						"description": "Login Access Token"
+					},
+					"response": []
+				},
+				{
+					"name": "User Update Data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "be057730-07ac-412a-b8f3-3a5a03f3071f",
+								"exec": [
+									"//Check status",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"//Check respone",
+									"pm.test(\"respone has job filed\", function () {",
+									"    pm.response.to.have.jsonBody('job')",
+									"});",
+									"//Check respone has updated",
+									"pm.test(\"respone has updated,expect result is \"+data.expect, function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.job).to.eql(data.expect);",
+									"});",
+									"",
+									"",
+									"",
+									"// pm.sendRequest(\"https://reqres.in/api/users/\"+pm.environment.get(\"id\"),  ",
+									"//     function (err, response) {",
+									"//             console.log(response.json());",
+									"// });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{name}}\",\r\n    \"job\": \"{{job}}\"\r\n}"
+						},
+						"url": "{{url_api_test}}/users/{{id}}",
+						"description": "User Update Data"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

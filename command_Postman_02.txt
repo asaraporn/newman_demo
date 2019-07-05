@@ -1,0 +1,25 @@
+# https://reqres.in/
+# Env :  ENV_DEV.postman_environment.json
+# TestCase : Postman_Collection_Example-02.postman_collection.json
+# Test Data : TestData.csv
+
+
+##################################################################
+########### Command Runner #######################################
+##################################################################
+>>install (newman report html) ** Export to collection : V2
+npm install -g newman-reporter-html
+
+
+$newman run Postman_Collection_Example-02.postman_collection.json -e ENV_DEV.postman_environment.json -d TestData.csv -n 2 --reporters html
+
+
+
+
+
+
+
+
+
+
+
