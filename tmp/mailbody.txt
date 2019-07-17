@@ -1,0 +1,6 @@
+Test Send e-mail from project Postman on Docker
+
+
+
+
+
