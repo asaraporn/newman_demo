@@ -1,0 +1,82 @@
+{
+	"info": {
+		"_postman_id": "d066871b-a4f1-495f-bc19-d1534cc5f35d",
+		"name": "Postman_Collection_mVAS",
+		"description": "Testing ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "respone_validation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cbccbe2a-7e0f-4d43-aa1c-dd6aca12f10a",
+						"exec": [
+							"//https://scrolltest.com/2017/01/21/api-testing-using-postman-advance-test-cases/\r",
+							"// API Testing includes\r",
+							"// 1. JSON Schema Validation\r",
+							"// 2. Response Time Verification\r",
+							"// 3. Verification of the Keys defined in response by API\r",
+							"// 4. Values as Expected (Data driven Testing) in response\r",
+							"// Note[json-schema: https://tools.ietf.org/html/draft-zyp-json-schema-03\r",
+							"// https://tools.ietf.org/html/draft-zyp-json-schema-03#section-5.18\r",
+							"// https://geraintluff.github.io/tv4/\r",
+							"\r",
+							"tests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\");\r",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 500;\r",
+							"tests[\"User ID is Present\"] = responseBody.has(\"userId\");\r",
+							"tests[\"ID is Present\"] = responseBody.has(\"id\");\r",
+							"tests[\"Title is Present\"] = responseBody.has(\"title\");\r",
+							"tests[\"API Bodyis Present\"] = responseBody.has(\"body\");\r",
+							"\r",
+							"var jsonData = JSON.parse(responseBody);\r",
+							"tests[\"User ID should be \"+jsonData.userId] = jsonData.userId === 1;\r",
+							"console.log(\"User ID I am getting from API is \"+jsonData.userId);\r",
+							"\r",
+							"var schema = {\r",
+							"\"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+							"\"type\": \"object\",\r",
+							"\"properties\": {\r",
+							"        \"userId\": {\r",
+							"        \"type\": \"integer\"\r",
+							"         ,\"maximum\":10\r",
+							"        },\r",
+							"        \"id\": {\r",
+							"        \"type\": \"integer\"\r",
+							"        },\r",
+							"        \"title\": {\r",
+							"        \"type\": \"string\"\r",
+							"        ,\"maxLength\":200\r",
+							"        },\r",
+							"        \"body\": {\r",
+							"        \"type\": \"string\"\r",
+							"        }\r",
+							"},\r",
+							"\"required\": [\r",
+							"        \"userId\",\r",
+							"        \"id\",\r",
+							"        \"title\",\r",
+							"        \"body\"\r",
+							"        ]\r",
+							"};\r",
+							"\r",
+							"tests[\"Valid scehma\"] = tv4.validate(jsonData, schema);\r",
+							"console.log(\"Validation failed: \", tv4.error);\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://jsonplaceholder.typicode.com/posts/1"
+			},
+			"response": []
+		}
+	]
+}
