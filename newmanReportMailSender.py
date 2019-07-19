@@ -14,6 +14,7 @@ from email.mime.base import MIMEBase
 from email import encoders
 
 
+
 #############################################################################
 # Declare the function to return all file paths of the particular directory
 def retrieve_file_paths(dirName):
@@ -57,15 +58,15 @@ def zipDirectory():
     return zip_name
 
 
-# def remove(path):
-#     """ param <path> could either be relative or absolute. """
-#     if os.path.isfile(path):
-#         os.remove(path)  # remove the file
-#     elif os.path.isdir(path):
-#         pathlib.rmtree(path)  # remove dir and all contains
-#     else:
-#         raise ValueError("file {} is not a file or dir.".format(path))
-
+def removeFile(dirName):
+    # setup file paths variable
+    filePaths = []
+    # Read all directory, subdirectories and file lists
+    for root, directories, files in os.walk(dirName):
+        print(root)
+        for filename in files:
+            os.remove(root+'/'+filename)
+            print('report file is deleted successfully!')
 
 #########################################################################
 fromaddr = "asaraporn@addtechhub.com"
@@ -122,4 +123,11 @@ s.sendmail(fromaddr, toaddr, text)
 # terminating the session 
 s.quit()
 
+#################################################################################
+#delete newman report file
+dir_name = 'newman'
+removeFile(dir_name)
+
+print("==== End =====")
+################################################################################
 
