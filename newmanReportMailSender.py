@@ -5,7 +5,7 @@
 import os
 import zipfile
 import datetime
-import pathlib
+#import pathlib
 
 import smtplib 
 from email.mime.multipart import MIMEMultipart 
@@ -57,14 +57,14 @@ def zipDirectory():
     return zip_name
 
 
-def remove(path):
-    """ param <path> could either be relative or absolute. """
-    if os.path.isfile(path):
-        os.remove(path)  # remove the file
-    elif os.path.isdir(path):
-        pathlib.rmtree(path)  # remove dir and all contains
-    else:
-        raise ValueError("file {} is not a file or dir.".format(path))
+# def remove(path):
+#     """ param <path> could either be relative or absolute. """
+#     if os.path.isfile(path):
+#         os.remove(path)  # remove the file
+#     elif os.path.isdir(path):
+#         pathlib.rmtree(path)  # remove dir and all contains
+#     else:
+#         raise ValueError("file {} is not a file or dir.".format(path))
 
 
 #########################################################################
