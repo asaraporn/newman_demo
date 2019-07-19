@@ -13,7 +13,7 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase 
 from email import encoders
 
-
+current_date_time = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
 
 #############################################################################
 # Declare the function to return all file paths of the particular directory
@@ -36,7 +36,7 @@ def zipDirectory():
     # Assign the name of the directory to zip
     #dir_name = 'mydir'
     dir_name = 'newman'
-    current_date_time = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+    # current_date_time = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
     print("current_date_time >>> "+current_date_time )
 
     # Call the function to retrieve all files and folders of the assigned directory
@@ -73,10 +73,8 @@ fromaddr = "asaraporn@addtechhub.com"
 toaddr = "hadsai.g@gmail.com"
 #filename = "newman-run-report-2019-07-05-05-35-08-237-0.html"
 Password = "Hadsai.1"
-Subject = "Subject of the Mail"
-body = "Body_of_the_mail"
-
-
+Subject = "[newman]Report of "+current_date_time
+body = "[newman]Report of "+current_date_time
 
 # instance of MIMEMultipart
 msg = MIMEMultipart()
@@ -85,9 +83,9 @@ msg['From'] = fromaddr
 # storing the receivers email address 
 msg['To'] = toaddr
 # storing the subject 
-msg['Subject'] = "Subject of the Mail"
+msg['Subject'] = Subject
 # string to store the body of the mail
-body = "Body_of_the_mail"
+body = body
 
 ###########################################################################
 #Zip Folder
