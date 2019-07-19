@@ -36,7 +36,7 @@ body = "Body_of_the_mail"
 msg.attach(MIMEText(body, 'plain')) 
 
 # open the file to be sent 
-filename = "/newman/newman-run-report-2019-07-05-05-35-08-237-0.html"
+filename = "newman-run-report-2019-07-05-05-35-08-237-0.html"
 attachment = open(filename, "rb")
 
 # instance of MIMEBase and named as p 
